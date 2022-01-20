@@ -1,0 +1,42 @@
+<div class="login-container container d-flex justify-content-center align-items-center">
+    <div class="container-sm d-flex justify-content-center align-items-center">
+        <div class="container-sm login-box">
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="login-img-container">
+                        <img src="../../../../assets/imgs/CIB_3.png" class="login-logo"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input [(ngModel)]="rut" (input)="formatoValidoRut($event)" type="text" class="form-control" id="xd">
+                            <label for="xd">RUT</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-floating mb-3">
+                        <input [(ngModel)]="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                        <label for="floatingPassword">Contraseña</label>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="error && !isLoading" class="alert alert-danger" role="alert">
+                <span>{{errorMsg}}</span>
+            </div>
+            <div *ngIf="isLoading" class="row">
+                <div class="d-flex align-items-center">
+                    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                </div>
+            </div>
+            <div *ngIf="!isLoading" class="row">
+                <div class="col d-flex justify-content-end">
+                    <button (click)="iniciarSesion()" type="button" class="btn btn-primary login-btn">Iniciar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

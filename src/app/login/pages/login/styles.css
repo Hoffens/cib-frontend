@@ -1,0 +1,35 @@
+body {
+    height: 100vh;
+}
+
+.login-container {
+    height: 100vh;
+}
+
+.login-img-container {
+    padding: 10px;
+    margin-bottom: 15px;
+    width: 40%;
+}
+
+.login-logo {
+    width: 100%;
+    height: auto;
+}
+
+.login-box {
+    height: 500px;
+    width: 550px;
+    border-radius: 5px;
+}
+
+.login-btn {
+    margin-top: 10px;
+    background-color: #15324a;
+    border-color: #15324a;
+}
+
+.login-btn:hover {
+    background-color: #15324a;
+    border-color: #15324a;
+}

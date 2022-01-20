@@ -1,0 +1,33 @@
+{
+  "name": "angular-rut-validator",
+  "main": "src/angular-rut-validator.js",
+  "homepage": "https://github.com/gpincheiraa/angular-rut-validator",
+  "authors": [
+    "Gonzalo Pincheira A. <g.pincheira.a@gmail.com>"
+  ],
+  "description": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.5.2",
+    "angular-mocks": "~1.5.5"
+  },
+  "version": "0.0.2",
+  "_release": "0.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.0.2",
+    "commit": "ec3a0fd79f25c1497bbbef5a072e6f4ef46e6738"
+  },
+  "_source": "https://github.com/gpincheiraa/angular-rut-validator.git",
+  "_target": "^0.0.2",
+  "_originalSource": "angular-rut-validator",
+  "_direct": true
+}
