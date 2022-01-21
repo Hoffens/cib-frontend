@@ -11,8 +11,8 @@
             <div class="row">
                 <div class="col">
                     <div class="form-floating mb-3">
-                        <input [(ngModel)]="rut" (input)="formatoValidoRut($event)" type="text" class="form-control" id="xd">
-                            <label for="xd">RUT</label>
+                        <input [(ngModel)]="rut" (input)="formatoValidoRut($event)" type="text" class="form-control" id="rut-input">
+                            <label for="rut-input">RUT</label>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             </div>
             <div *ngIf="!isLoading" class="row">
                 <div class="col d-flex justify-content-end">
-                    <button (click)="iniciarSesion()" type="button" class="btn btn-primary login-btn">Iniciar sesión</button>
+                    <button (click)="login()" type="button" class="btn btn-primary login-btn">Iniciar sesión</button>
                 </div>
             </div>
         </div>

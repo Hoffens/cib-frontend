@@ -7,6 +7,10 @@ import { LoginModule } from './login/login.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     LoginModule,
-    SharedModule
+    SharedModule,
+    DashboardModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    UsuariosModule
   ],
   bootstrap: [AppComponent]
 })

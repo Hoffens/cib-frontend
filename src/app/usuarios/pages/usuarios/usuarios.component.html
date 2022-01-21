@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">
+        <div *ngIf="showMenu" class="col-2">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col">
+            <div class="container-fluid">
+                <div class="navbar navbar-expand-lg header">
+                    <div class="firstHeader">
+                        <div id="content">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <div>
+                                    <button (click)="esconderMenu()" type="button" id="sidebarCollapse" class="btn btn-custom">
+                                        <img class="toggle-menu" src="../../../../assets/imgs/toggle-menu.svg"/>
+                                    </button>
+                                </div>
+                            </nav>
+                        </div>
+                        <h3>{{actualUser.compania}}</h3>
+                    </div>
+                    <h3>Bienvenid@, {{actualUser.nombre + ' ' + actualUser.apellido_paterno + ' ' + actualUser.apellido_materno}}</h3>
+                </div>
+                <div *ngIf="isLoading" class="align-items-center">
+                    <div>
+                        <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div>
+                </div>
+                <div *ngIf="!isLoading" class="table-responsive-sm">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">Acciones</th>
+                            <th scope="col">Compania</th>
+                            <th scope="col">Rol</th>
+                            <th scope="col">Fecha ingreso</th>
+                            <th scope="col">RUT</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido paterno</th>
+                            <th scope="col">Apellido materno</th>
+                            <th scope="col">Fecha nacimiento</th>
+                            <th scope="col">Grupo sanguíneo</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Activo</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="listUsuarios">
+                          <tr *ngFor="let user of listUsuarios">
+                            <td>Edit</td>
+                            <td>{{user.compania}}</td>
+                            <td>{{user.rol}}</td>
+                            <td>{{user.fecha_ingreso}}</td>
+                            <td>{{user.rut}}</td>
+                            <td>{{user.nombre}}</td>
+                            <td>{{user.apellido_paterno}}</td>
+                            <td>{{user.apellido_materno}}</td>
+                            <td>{{user.fecha_nacimiento}}</td>
+                            <td>{{user.grupo_sanguineo}}</td>
+                            <td>{{user.correo}}</td>
+                            <td>{{user.telefono}}</td>
+                            <td>{{user.activo}}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './sidebar/sidebar.component';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 @NgModule({
@@ -9,10 +9,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     SidebarComponent
   ],
   exports: [
-    SidebarComponent
+    SidebarComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatSidenavModule
   ]
 })
 export class SharedModule { }
