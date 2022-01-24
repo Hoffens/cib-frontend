@@ -6,16 +6,19 @@
         </div>
         <ul class="list-unstyled components">
             <li>
-                <a href="#homeSubmenu">Inicio</a>
+                <a href="dashboard">Inicio</a>
             </li>
             <li>
-                <a href="#">Companias</a>
+                <a href="dashboard">Mis asistencias</a>
             </li>
             <li>
-                <a href="#pageSubmenu">Usuarios</a>
+                <a href="companias">Companias</a>
             </li>
             <li>
-                <a href="#">Carros</a>
+                <a href="users">Usuarios</a>
+            </li>
+            <li>
+                <a href="carros">Carros</a>
             </li>
             <li>
                 <a href="#">Herramientas</a>
@@ -24,7 +27,7 @@
                 <a href="#">Actos de servicio</a>
             </li>
             <li>
-                <a href="#">Cerrar sesión</a>
+                <a (click)="logout()" href="#">Cerrar sesión</a>
             </li>
         </ul>
     </nav>

@@ -11,6 +11,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { CompaniasModule } from './companias/companias.module';
+import { CarrosModule } from './carros/carros.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import { UsuariosModule } from './usuarios/usuarios.module';
     DashboardModule,
     BrowserAnimationsModule,
     MatSidenavModule,
-    UsuariosModule
+    UsuariosModule,
+    CompaniasModule,
+    CarrosModule,
+    NgbModule
   ],
   bootstrap: [AppComponent]
 })

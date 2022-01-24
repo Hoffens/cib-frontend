@@ -1,42 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuariosService } from '../../services/usuarios.service';
+import { CarrosService } from '../../services/carros.service';
 import { Router } from '@angular/router';
-import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-
 
 @Component({
-  selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css']
+  selector: 'app-carros',
+  templateUrl: './carros.component.html',
+  styleUrls: ['./carros.component.css']
 })
-export class UsuariosComponent implements OnInit {
+export class CarrosComponent implements OnInit {
 
-  public listUsuarios: any = []
+  public listCarros: any = []
   public isLoading: boolean = true
   public actualUser: any
   public showMenu: boolean = true
-  public showModal: boolean = false
-  public ngbModalOptions: NgbModalOptions = {
-    backdrop : 'static',
-    keyboard : false,
-    scrollable : true,
-  }
 
-  constructor(private userService: UsuariosService, private route: Router, private modalService: NgbModal) { }
+  constructor(private carroService: CarrosService, private route: Router) { }
 
   ngOnInit(): void {
     this.validarToken()
     let usuario = localStorage.getItem('usuario')
     this.actualUser = JSON.parse(usuario == null ? '' : usuario)
-    this.obtenerUsuarios()
+    this.obtenerCarros()
   }
 
-  obtenerUsuarios() {
+  obtenerCarros() {
     let token = localStorage.getItem('token') 
-
-    this.userService.obtenerUsuarios(token == null ? '' : token).subscribe({
+    this.carroService.obtenerCarros(token == null ? '' : token).subscribe({
       next: (v: any) => { 
-        this.listUsuarios = v.data
+        this.listCarros = v.data
+        console.log(this.listCarros)
         this.isLoading = false
       },
       error: (e) => {
@@ -68,7 +60,7 @@ export class UsuariosComponent implements OnInit {
   validarToken() {
     let token = localStorage.getItem('token')
     if (token) {
-      this.userService.validarToken(token).subscribe({
+      this.carroService.validarToken(token).subscribe({
         error: (e) => {
           this.route.navigate(['/404'])
         }
@@ -78,17 +70,6 @@ export class UsuariosComponent implements OnInit {
     {
       this.route.navigate(['/404'])
     }
-  }
-
-  open(content: any) {
-    this.modalService.open(content, this.ngbModalOptions)
-    /*
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      console.log(result);
-    }, (reason) => {
-      console.log('xd');
-    });
-    */
   }
 
 }

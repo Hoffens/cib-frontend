@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root'
 })
-export class UsuariosService {
+export class CarrosService {
 
-  private endpoint: string = '/api/users'
+  private endpoint: string = '/api/carros'
   private endpointToken: string = '/api/validateToken'
 
   constructor(private http: HttpClient) { }
 
-  obtenerUsuarios(token: string) {
+  obtenerCarros(token: string) {
     //let header = new HttpHeaders()
     //let token = JSON.stringify(localStorage.getItem('token'))
     //let xd = localStorage.getItem('token') 

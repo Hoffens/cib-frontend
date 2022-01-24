@@ -3,6 +3,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from './login/pages/login/login.component';
 import { DashboardComponent } from "./dashboard/pages/dashboard/dashboard.component";
 import { UsuariosComponent } from './usuarios/pages/usuarios/usuarios.component';
+import { CompaniasComponent } from "./companias/pages/companias/companias.component";
+import { CarrosComponent } from './carros/pages/carros/carros.component';
 
 
 const routes: Routes = [
@@ -19,6 +21,16 @@ const routes: Routes = [
     {
         path: 'users',
         component: UsuariosComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'companias',
+        component: CompaniasComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'carros',
+        component: CarrosComponent,
         pathMatch: 'full'
     },
     {

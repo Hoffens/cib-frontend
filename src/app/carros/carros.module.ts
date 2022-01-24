@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { CarrosComponent } from './pages/carros/carros.component';
 import { SharedModule } from '../shared/shared.module';
 
 
 
 @NgModule({
   declarations: [
-    UsuariosComponent
-  ],
-  exports: [
-    UsuariosComponent
+    CarrosComponent
   ],
   imports: [
     CommonModule,
-    SharedModule,
+    SharedModule
   ]
 })
-export class UsuariosModule { }
+export class CarrosModule { }

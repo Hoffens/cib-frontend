@@ -5,14 +5,14 @@ import { HttpClient} from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuariosService {
+export class CompaniasService {
 
-  private endpoint: string = '/api/users'
+  private endpoint: string = '/api/companias'
   private endpointToken: string = '/api/validateToken'
 
   constructor(private http: HttpClient) { }
 
-  obtenerUsuarios(token: string) {
+  obtenerCompanias(token: string) {
     //let header = new HttpHeaders()
     //let token = JSON.stringify(localStorage.getItem('token'))
     //let xd = localStorage.getItem('token') 
