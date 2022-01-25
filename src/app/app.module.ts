@@ -14,6 +14,7 @@ import { UsuariosModule } from './usuarios/usuarios.module';
 import { CompaniasModule } from './companias/companias.module';
 import { CarrosModule } from './carros/carros.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UsuariosModule,
     CompaniasModule,
     CarrosModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })
