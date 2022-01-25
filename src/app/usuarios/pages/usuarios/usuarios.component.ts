@@ -25,14 +25,14 @@ export class UsuariosComponent implements OnInit {
     fecha_nacimiento: new FormControl('', Validators.required),
     correo: new FormControl('', Validators.compose([Validators.required, Validators.email])),
     telefono: new FormControl(''),
-    fecha_ingreso: new FormControl(''),
-    grupo_sanguineo: new FormControl(1),
+    grupo_sanguineo: new FormControl(0),
     activo: new FormControl(true),
   });
 
   public listUsuarios: any = []
   public listRoles: any = []
   public listCompanias: any = []
+  public listGrupoSanguineo: any = []
   public isLoading: boolean = true
   public actualUser: any
   public showMenu: boolean = true
@@ -60,6 +60,7 @@ export class UsuariosComponent implements OnInit {
     this.validarToken()
     this.obtenerRoles()
     this.obtenerCompanias()
+    this.obtenerGrupoSanguineo()
     let usuario = localStorage.getItem('usuario')
     this.actualUser = JSON.parse(usuario == null ? '' : usuario)
     this.actualUser.rol == 3 || this.actualUser.rol == 7 ? this.crearUsuario = true : this.crearUsuario = false
@@ -68,7 +69,6 @@ export class UsuariosComponent implements OnInit {
 
   obtenerUsuarios() {
     let token = localStorage.getItem('token') 
-
     this.userService.obtenerUsuarios(token == null ? '' : token).subscribe({
       next: (v: any) => { 
         this.listUsuarios = v.data
@@ -157,7 +157,22 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
-  open(content: any) {
+  obtenerGrupoSanguineo() {
+    let token = localStorage.getItem('token') 
+    this.userService.obtenerGrupoSanguineo(token == null ? '' : token).subscribe({
+      next: (v: any) => { 
+        console.log(v.data)
+        this.listGrupoSanguineo = v.data
+        this.isLoading = false
+      },
+      error: (e) => {
+        console.log(e)
+        this.isLoading = false
+      }
+    })
+  }
+
+  open(content: any, isEdit: boolean) {
     this.modalReference = this.modalService.open(content, this.ngbModalOptions)
     /*
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -180,6 +195,7 @@ export class UsuariosComponent implements OnInit {
   onSubmit() {
     let rutFormateado = this.userForm.get('rut')?.value
     let token = localStorage.getItem('token') 
+    let grupoS = Number(this.userForm.get('grupo_sanguineo')?.value) == 0 ? '' : Number(this.userForm.get('grupo_sanguineo')?.value)
     
     if (this.userForm.valid) {
       this.modalLoading = true
@@ -196,10 +212,12 @@ export class UsuariosComponent implements OnInit {
         correo : this.userForm.get('correo')?.value,
         telefono : this.userForm.get('telefono')?.value,
         fecha_ingreso : this.userForm.get('fecha_ingreso')?.value,
-        grupo_sanguineo : Number(this.userForm.get('grupo_sanguineo')?.value),
+        grupo_sanguineo : grupoS,
         activo : this.userForm.get('activo')?.value,
         rut_cuenta : Number(this.actualUser.rut)
       }
+
+      console.log(JSON.stringify(payload))
 
       this.userService.crearUsuario(token == null ? '' : token, payload).subscribe({
         next: (v: any) => {
@@ -235,8 +253,7 @@ export class UsuariosComponent implements OnInit {
       fecha_nacimiento: new FormControl('', Validators.required),
       correo: new FormControl('', Validators.compose([Validators.required, Validators.email])),
       telefono: new FormControl(''),
-      fecha_ingreso: new FormControl(''),
-      grupo_sanguineo: new FormControl(1),
+      grupo_sanguineo: new FormControl(0),
       activo: new FormControl(true),
     });
   }
@@ -255,6 +272,11 @@ export class UsuariosComponent implements OnInit {
 
   onCancel() {
     this.limpiarFormulario()
+    this.modalReference.close()
+  }
+
+  onUserEdit(rut: string) {
+    console.log(rut)
   }
 
 }

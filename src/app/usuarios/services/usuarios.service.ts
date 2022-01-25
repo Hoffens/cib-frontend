@@ -12,14 +12,12 @@ export class UsuariosService {
   private endpointRoles: string = '/api/roles'
   private endpointsCompanias: string = '/api/companias'
   private endpointCrearUser: string = '/api/usuario'
+  private endpointGrupoSanguineo: string = '/api/grupos_sanguineos'
+
 
   constructor(private http: HttpClient) { }
 
   obtenerUsuarios(token: string) {
-    //let header = new HttpHeaders()
-    //let token = JSON.stringify(localStorage.getItem('token'))
-    //let xd = localStorage.getItem('token') 
-
     return this.http.get(this.endpoint, { headers: {'Authorization' : token} })
   }
 
@@ -36,8 +34,13 @@ export class UsuariosService {
   }
 
   crearUsuario(token: string, payload: any) {
-    console.log(payload)
     return this.http.post<any>(this.endpointCrearUser, payload, { headers: {'Authorization' : token} })
   }
+
+  obtenerGrupoSanguineo(token: string) {
+    return this.http.get(this.endpointGrupoSanguineo, { headers: {'Authorization' : token} })
+  }
+
+
 
 }
