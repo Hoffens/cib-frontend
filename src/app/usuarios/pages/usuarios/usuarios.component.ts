@@ -52,6 +52,7 @@ export class UsuariosComponent implements OnInit {
   public modalReference: any = null
   public errorFormulario: boolean = false
   public modalLoading: boolean = false
+  public isEdit: boolean = false
 
 
   constructor(private userService: UsuariosService, private route: Router, private modalService: NgbModal) { }
@@ -172,7 +173,26 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
-  open(content: any, isEdit: boolean) {
+  open(content: any, isEdit: boolean, user: any) {
+    console.log(user)
+    if (isEdit) {
+      this.isEdit = true   
+      this.userForm = new FormGroup({
+        rut: new FormControl(user.rut),
+        password: new FormControl('', Validators.compose([Validators.maxLength(10)])),
+        conf_password: new FormControl('', Validators.compose([Validators.maxLength(10)])),
+        compania: new FormControl(0, Validators.required),
+        rol: new FormControl(0, Validators.required),
+        nombre: new FormControl(user.nombre, Validators.required),
+        apellido_paterno: new FormControl(user.apellido_paterno, Validators.required),
+        apellido_materno: new FormControl(user.apellido_materno, Validators.required),
+        fecha_nacimiento: new FormControl('03-14-2000', Validators.required),
+        correo: new FormControl(user.correo, Validators.compose([Validators.required, Validators.email])),
+        telefono: new FormControl(user.telefono),
+        grupo_sanguineo: new FormControl(0),
+        activo: new FormControl(user.activo == 1 ? true : false),
+      });
+    }
     this.modalReference = this.modalService.open(content, this.ngbModalOptions)
     /*
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -195,7 +215,7 @@ export class UsuariosComponent implements OnInit {
   onSubmit() {
     let rutFormateado = this.userForm.get('rut')?.value
     let token = localStorage.getItem('token') 
-    let grupoS = Number(this.userForm.get('grupo_sanguineo')?.value) == 0 ? '' : Number(this.userForm.get('grupo_sanguineo')?.value)
+    let grupoS = Number(this.userForm.get('grupo_sanguineo')?.value) == 0 ? null : Number(this.userForm.get('grupo_sanguineo')?.value)
     
     if (this.userForm.valid) {
       this.modalLoading = true
@@ -274,9 +294,4 @@ export class UsuariosComponent implements OnInit {
     this.limpiarFormulario()
     this.modalReference.close()
   }
-
-  onUserEdit(rut: string) {
-    console.log(rut)
-  }
-
 }
