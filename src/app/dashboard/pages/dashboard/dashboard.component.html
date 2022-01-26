@@ -16,31 +16,58 @@
                                 </div>
                             </nav>
                         </div>
-                        <h3>{{actualUser.compania}}</h3>
                     </div>
                     <h3>Bienvenid@, {{actualUser.nombre + ' ' + actualUser.apellido_paterno + ' ' + actualUser.apellido_materno}}</h3>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary create-object">Registrar asistencia</button>
+                    <button type="button" class="btn btn-primary create-object" (click)="open(content)">Registrar asistencia</button>
                 </div>
 
-                <div class="modal" tabindex="-1">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Modal title</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <ng-template #content let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Registro de asistencia</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="adsForm">
+                        <div class="form-group">
+                            <label for="carroHerramienta">Actos de servicio</label>
+                            <select class="custom-select" id="carroHerramienta" formControlName="acto_de_servicio">
+                                <option value="0" selected>Seleccione acto de servicio</option>
+                                <option *ngFor="let ads of listAds" [value]="ads.id">{{ads.clasificacion}} - {{ads.descripcion}} - {{ads.direccion}} - {{ads.fecha_hora}}</option>
+                            </select>
+                            <div *ngIf="this.adsForm.get('acto_de_servicio')?.touched && this.adsForm.get('acto_de_servicio')?.value == 0" class="alert alert-danger" role="alert">
+                                Por favor seleccione un acto de servicio.
+                            </div>
                         </div>
-                        <div class="modal-body">
-                          <p>Modal body text goes here.</p>
+                        <div *ngIf="errorFormulario" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            El formulario contiene errores, revise los datos ingresados.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeModalErrorAlert()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-dark" (click)="onSubmit()">Registrar asistencia</button>
                         </div>
-                      </div>
+                      </form>
                     </div>
+                  </ng-template>
+
+                  <div *ngIf="mostrarExito" class="alert alert-success alert-dismissible fade show" role="alert">
+                    Asistencia registrada correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeSuccessAlert()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
                   </div>
+                <div *ngIf="mostrarFail" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{errorMsg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeErrorAlert()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
                 <div *ngIf="!isLoading" class="align-items-center">
                     <div>
