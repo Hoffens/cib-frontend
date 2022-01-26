@@ -21,54 +21,90 @@
                 </div>
 
                 <div>
-                    <button type="button" class="btn btn-primary create-object">Crear acto de servicio</button>
+                    <button type="button" class="btn btn-primary create-object" (click)="open(content)">Crear acto de servicio</button>
                 </div>
                 
-                <!-- 
+                
                 <ng-template #content let-modal>
                     <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">Creación compañía</h4>
+                      <h4 class="modal-title" id="modal-basic-title">Creación acto de servicio</h4>
                       <button type="button" class="close" aria-label="Close" (click)="onCancel()">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form [formGroup]="companiaForm">
+                      <form [formGroup]="adsForm">
                         <div class="form-group">
-                            <label for="nombreInput">Nombre</label>
-                            <input type="text" class="form-control" id="nombreInput" placeholder="Ingrese nombre" formControlName="nombre">
-                            <div *ngIf="this.companiaForm.get('nombre')?.touched && !this.companiaForm.get('nombre')?.valid" class="alert alert-danger" role="alert">
-                              Por favor ingrese un nombre válido.
-                            </div>
+                          <label for="clasificacion">Clasificación</label>
+                          <select class="custom-select" id="clasificacion" formControlName="clasificacion">
+                              <option value="0" selected>Seleccione clasificación</option>
+                              <option *ngFor="let clasificacion of listClasificacion" [value]="clasificacion.codigo">{{clasificacion.codigo}} - {{clasificacion.descripcion}}</option>
+                          </select>
+                          <div *ngIf="this.adsForm.get('clasificacion')?.touched && this.adsForm.get('clasificacion')?.value == 0" class="alert alert-danger" role="alert">
+                              Por favor seleccione una clasificación.
+                          </div>
                         </div>
                         <div class="form-group">
-                            <label for="ubicacionInput">Ubicación</label>
-                            <input type="text" class="form-control" id="ubicacionInput" placeholder="Ingrese ubicación" formControlName="ubicacion">
-                            <div *ngIf="this.companiaForm.get('ubicacion')?.touched && !this.companiaForm.get('ubicacion')?.valid" class="alert alert-danger" role="alert">
-                              Por favor ingrese una ubicación válida.
-                            </div>
+                          <label for="direccionInput">Dirección</label>
+                          <input type="text" class="form-control" id="direccionInput" placeholder="Ingrese dirección" formControlName="direccion">
+                          <div *ngIf="this.adsForm.get('direccion')?.touched && !this.adsForm.get('direccion')?.valid" class="alert alert-danger" role="alert">
+                            Por favor ingrese una dirección válida.
+                          </div>
                         </div>
                         <div class="form-group">
-                            <label for="telefonoInput">Teléfono</label>
-                            <input type="text" class="form-control" id="telefonoInput" placeholder="Ingrese teléfono" formControlName="telefono">
-                            <div *ngIf="this.companiaForm.get('telefono')?.touched && !this.companiaForm.get('telefono')?.valid" class="alert alert-danger" role="alert">
-                              Por favor ingrese un teléfono válido.
-                            </div>
+                          <label for="fechaHora">Fecha y hora</label>
+                          <input type="datetime-local" id="fechaHora" class="form-control" placeholder="yyyy-mm-dd" formControlName="fecha_hora">
+                          <div *ngIf="this.adsForm.get('fecha_hora')?.touched && this.adsForm.get('fecha_hora')?.value == 0" class="alert alert-danger" role="alert">
+                              Por favor ingrese la fecha y hora del suceso.
+                          </div>
                         </div>
-                        <div *ngIf="errorFormulario" class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <div class="form-group">
+                          <label for="obac">OBAC</label>
+                          <select class="custom-select" id="obac" formControlName="obac">
+                              <option value="0" selected>Seleccione OBAC</option>
+                              <option *ngFor="let usuario of listUsuarios" [value]="usuario.rut">{{usuario.rut}} - {{usuario.nombre}} {{usuario.apellido_paterno}} {{usuario.apellido_materno}}</option>
+                          </select>
+                          <div *ngIf="this.adsForm.get('obac')?.touched && this.adsForm.get('obac')?.value == 0" class="alert alert-danger" role="alert">
+                              Por favor seleccione un OBAC.
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="estado">Estado</label>
+                          <select class="custom-select" id="estado" formControlName="estado">
+                              <option value="0" selected>Seleccione estado</option>
+                              <option *ngFor="let estado of listEstados" [value]="estado.id">{{estado.nombre}} - {{estado.descripcion}}</option>
+                          </select>
+                          <div *ngIf="this.adsForm.get('estado')?.touched && this.adsForm.get('estado')?.value == 0" class="alert alert-danger" role="alert">
+                              Por favor seleccione un estado.
+                          </div>
+                          <div *ngIf="errorFormulario" class="alert alert-danger alert-dismissible fade show" role="alert">
                             El formulario contiene errores, revise los datos ingresados.
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeModalErrorAlert()">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
+                        </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancelar</button>
-                          <button type="submit" class="btn btn-outline-dark" (click)="onSubmit()">Crear compañía</button>
+                          <button type="submit" class="btn btn-outline-dark" (click)="onSubmit()">Crear acto de servicio</button>
                         </div>
                       </form>
                     </div>
                   </ng-template>
-                  -->
+
+                  <div *ngIf="mostrarExito" class="alert alert-success alert-dismissible fade show" role="alert">
+                    Acto de servicio creado correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeSuccessAlert()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <div *ngIf="mostrarFail" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{errorMsg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeErrorAlert()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                  
                 <div *ngIf="isLoading" class="align-items-center">
                     <div>
                         <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
