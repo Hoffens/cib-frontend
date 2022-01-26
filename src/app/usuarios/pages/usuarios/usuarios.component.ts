@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -220,6 +220,7 @@ export class UsuariosComponent implements OnInit {
     if (this.userForm.valid) {
       this.modalLoading = true
       this.errorFormulario = false
+      
       const payload = {
         rut : Number(rutFormateado.slice(0, rutFormateado.length - 2)),
         password : this.userForm.get('password')?.value,
@@ -292,6 +293,7 @@ export class UsuariosComponent implements OnInit {
 
   onCancel() {
     this.limpiarFormulario()
+    this.errorFormulario = false
     this.modalReference.close()
   }
 }

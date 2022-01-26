@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CompaniasService } from '../../services/companias.service';
 import { Router } from '@angular/router';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -10,12 +13,31 @@ import { Router } from '@angular/router';
 })
 export class CompaniasComponent implements OnInit {
 
+  companiaForm = new FormGroup({
+    nombre: new FormControl('', Validators.required),
+    ubicacion: new FormControl('', Validators.required),
+    telefono: new FormControl('', Validators.required),
+    activo: new FormControl(true),
+  });
+
   public listCompanias: any = []
   public isLoading: boolean = true
   public actualUser: any
   public showMenu: boolean = true
+  public ngbModalOptions: NgbModalOptions = {
+    backdrop : 'static',
+    keyboard : false,
+    scrollable : true,
+    size : 'lg'
+  }
+  public modalReference: any = null
+  public errorFormulario: any = false
+  public mostrarExito: boolean = false
+  public mostrarFail: boolean = false
+  public errorMsg: string = ''
+  
 
-  constructor(private companiaService: CompaniasService, private route: Router) { }
+  constructor(private companiaService: CompaniasService, private route: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.validarToken()
@@ -71,6 +93,70 @@ export class CompaniasComponent implements OnInit {
     {
       this.route.navigate(['/404'])
     }
+  }
+
+  limpiarFormulario() {
+    this.companiaForm = new FormGroup({
+      nombre: new FormControl('', Validators.required),
+      ubicacion: new FormControl('', Validators.required),
+      telefono: new FormControl('', Validators.required),
+      activo: new FormControl(true),
+    });
+  }
+
+  open(content: any) {
+    this.modalReference = this.modalService.open(content, this.ngbModalOptions)
+  }
+
+  onSubmit() {
+    let token = localStorage.getItem('token') 
+    const payload = {
+      nombre: this.companiaForm.get('nombre')?.value,
+      ubicacion: this.companiaForm.get('ubicacion')?.value,
+      telefono: this.companiaForm.get('telefono')?.value,
+      activo: true,
+      rut_cuenta: this.actualUser.rut
+    }
+
+    console.log(JSON.stringify(payload))
+ 
+    if (this.companiaForm.valid) {
+      this.companiaService.crearCompania(token == null ? '' : token, payload).subscribe({
+        next: (v: any) => {
+          this.limpiarFormulario()
+          this.mostrarFail = false
+          this.mostrarExito = true
+          this.modalReference.close()
+        },
+        error: (e: any) => {
+          console.log(e)
+          this.mostrarExito = false
+          this.mostrarFail = true
+          this.errorMsg = e.error.message
+          this.modalReference.close()
+        }
+      })
+    } else {
+      this.errorFormulario = true
+    }
+  }
+
+  closeErrorAlert() {
+    this.mostrarFail = false
+  }
+
+  closeSuccessAlert() {
+    this.mostrarExito = false
+  }
+
+  onCancel() {
+    this.limpiarFormulario()
+    this.errorFormulario = false
+    this.modalReference.close()
+  }
+
+  closeModalErrorAlert() {
+    this.errorFormulario = false
   }
 
 }

@@ -8,19 +8,21 @@ import { HttpClient} from '@angular/common/http';
 export class CompaniasService {
 
   private endpoint: string = '/api/companias'
+  private endpointCrearCompania: string = '/api/compania'
   private endpointToken: string = '/api/validateToken'
 
   constructor(private http: HttpClient) { }
 
   obtenerCompanias(token: string) {
-    //let header = new HttpHeaders()
-    //let token = JSON.stringify(localStorage.getItem('token'))
-    //let xd = localStorage.getItem('token') 
 
     return this.http.get(this.endpoint, { headers: {'Authorization' : token} })
   }
 
   validarToken(token: string) {
     return this.http.get(this.endpointToken, { headers: {'Authorization' : token} })
+  }
+
+  crearCompania(token: string, payload: any) {
+    return this.http.post(this.endpointCrearCompania, payload, { headers: {'Authorization' : token} })
   }
 }
