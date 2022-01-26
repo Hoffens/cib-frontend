@@ -11,7 +11,7 @@ export class HerramientasComponent implements OnInit {
 
   public actualUser: any
   public listHerramientas: any = []
-  public isLoading: boolean = false
+  public isLoading: boolean = true
   public showMenu: boolean = true
 
   constructor(private herramientasService: HerramientasService, private route: Router) { }
