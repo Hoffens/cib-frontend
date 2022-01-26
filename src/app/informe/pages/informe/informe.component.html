@@ -1,1 +1,136 @@
-<p>informe works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div *ngIf="showMenu" class="col-2">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col">
+            <div class="container-fluid">
+                <div class="navbar navbar-expand-lg header">
+                    <div class="firstHeader">
+                        <div id="content">
+                            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                                <div>
+                                    <button (click)="esconderMenu()" type="button" id="sidebarCollapse" class="btn btn-custom">
+                                        <img class="toggle-menu" src="../../../../assets/imgs/toggle-menu.svg"/>
+                                    </button>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <h3>Bienvenid@, {{actualUser.nombre + ' ' + actualUser.apellido_paterno + ' ' + actualUser.apellido_materno}}</h3>
+                </div>
+
+                <!-- 
+                <div>
+                    <button type="button" class="btn btn-primary create-object">Crear acto de servicio</button>
+                </div>
+                -->
+                
+                <!-- 
+                <ng-template #content let-modal>
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Creación compañía</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="onCancel()">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form [formGroup]="companiaForm">
+                        <div class="form-group">
+                            <label for="nombreInput">Nombre</label>
+                            <input type="text" class="form-control" id="nombreInput" placeholder="Ingrese nombre" formControlName="nombre">
+                            <div *ngIf="this.companiaForm.get('nombre')?.touched && !this.companiaForm.get('nombre')?.valid" class="alert alert-danger" role="alert">
+                              Por favor ingrese un nombre válido.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ubicacionInput">Ubicación</label>
+                            <input type="text" class="form-control" id="ubicacionInput" placeholder="Ingrese ubicación" formControlName="ubicacion">
+                            <div *ngIf="this.companiaForm.get('ubicacion')?.touched && !this.companiaForm.get('ubicacion')?.valid" class="alert alert-danger" role="alert">
+                              Por favor ingrese una ubicación válida.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefonoInput">Teléfono</label>
+                            <input type="text" class="form-control" id="telefonoInput" placeholder="Ingrese teléfono" formControlName="telefono">
+                            <div *ngIf="this.companiaForm.get('telefono')?.touched && !this.companiaForm.get('telefono')?.valid" class="alert alert-danger" role="alert">
+                              Por favor ingrese un teléfono válido.
+                            </div>
+                        </div>
+                        <div *ngIf="errorFormulario" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            El formulario contiene errores, revise los datos ingresados.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeModalErrorAlert()">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancelar</button>
+                          <button type="submit" class="btn btn-outline-dark" (click)="onSubmit()">Crear compañía</button>
+                        </div>
+                      </form>
+                    </div>
+                  </ng-template>
+                  -->
+                <div *ngIf="isLoading" class="align-items-center">
+                    <div>
+                        <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                    </div>
+                </div>
+
+                <!-- 
+                <div *ngIf="mostrarExito" class="alert alert-success alert-dismissible fade show" role="alert">
+                    Compañía creada correctamente.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeSuccessAlert()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <div *ngIf="mostrarFail" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{errorMsg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeErrorAlert()">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+-->
+                <div *ngIf="!isLoading" class="table-responsive-sm">
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th scope="col">Codigo</th>
+                            <th scope="col">Compania</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Origen</th>
+                            <th scope="col">Causa</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Seguro</th>
+                            <th scope="col">Victimas</th>
+                            <th scope="col">Bienes siniestrados</th>
+                            <th scope="col">Investigador</th>
+                            <th scope="col">Creador informe</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="listInformes">
+                          <tr *ngFor="let informe of listInformes">
+                            <td>{{informe.codigo}}</td>
+                            <td>{{informe.compania}}</td>
+                            <td>{{informe.descripcion}}</td>
+                            <td>{{informe.origen}}</td>
+                            <td>{{informe.causa}}</td>
+                            <td>{{informe.fecha}}</td>
+                            <td>{{informe.seguro}}</td>
+                            <td>{{informe.victimas}}</td>
+                            <td>{{informe.bienes_siniestrados}}</td>
+                            <td>{{informe.investigador}}</td>
+                            <td>{{informe.inf_usuario}}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+
+
