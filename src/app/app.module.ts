@@ -16,6 +16,8 @@ import { CarrosModule } from './carros/carros.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HerramientasModule } from './herramientas/herramientas.module';
+import { AdsModule } from './ads/ads.module';
+import { InformeModule } from './informe/informe.module';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { HerramientasModule } from './herramientas/herramientas.module';
     CarrosModule,
     NgbModule,
     ReactiveFormsModule,
-    HerramientasModule
+    HerramientasModule,
+    AdsModule,
+    InformeModule
   ],
   bootstrap: [AppComponent]
 })

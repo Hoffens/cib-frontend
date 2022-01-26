@@ -6,6 +6,9 @@ import { UsuariosComponent } from './usuarios/pages/usuarios/usuarios.component'
 import { CompaniasComponent } from "./companias/pages/companias/companias.component";
 import { CarrosComponent } from './carros/pages/carros/carros.component';
 import { HerramientasComponent } from './herramientas/pages/herramientas/herramientas.component';
+import { AdsComponent } from './ads/pages/ads/ads.component';
+import { InformeModule } from './informe/informe.module';
+import { InformeComponent } from './informe/pages/informe/informe.component';
 
 
 const routes: Routes = [
@@ -37,6 +40,16 @@ const routes: Routes = [
     {
         path: 'herramientas',
         component: HerramientasComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'ads',
+        component: AdsComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'informes',
+        component: InformeComponent,
         pathMatch: 'full'
     },
     {
