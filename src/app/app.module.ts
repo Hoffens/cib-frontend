@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HerramientasModule } from './herramientas/herramientas.module';
 import { AdsModule } from './ads/ads.module';
 import { InformeModule } from './informe/informe.module';
-
+import { AsistenciaModule } from './asistencia/asistencia.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,8 @@ import { InformeModule } from './informe/informe.module';
     ReactiveFormsModule,
     HerramientasModule,
     AdsModule,
-    InformeModule
+    InformeModule,
+    AsistenciaModule
   ],
   bootstrap: [AppComponent]
 })

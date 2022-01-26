@@ -9,6 +9,8 @@ import { HerramientasComponent } from './herramientas/pages/herramientas/herrami
 import { AdsComponent } from './ads/pages/ads/ads.component';
 import { InformeModule } from './informe/informe.module';
 import { InformeComponent } from './informe/pages/informe/informe.component';
+import { AsistenciaModule } from './asistencia/asistencia.module';
+import { AsistenciaComponent } from './asistencia/pages/asistencia/asistencia.component';
 
 
 const routes: Routes = [
@@ -50,6 +52,11 @@ const routes: Routes = [
     {
         path: 'informes',
         component: InformeComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'asistencia',
+        component: AsistenciaComponent,
         pathMatch: 'full'
     },
     {
