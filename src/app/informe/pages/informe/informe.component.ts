@@ -20,6 +20,8 @@ export class InformeComponent implements OnInit {
     this.validarToken()
     let usuario = localStorage.getItem('usuario')
     this.actualUser = JSON.parse(usuario == null ? '' : usuario)
+    if (this.actualUser.rol != 5 && this.actualUser.rol != 2)
+      this.route.navigate(['/404'])
     this.obtenerInformes()
   }
 
