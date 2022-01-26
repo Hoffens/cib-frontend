@@ -20,7 +20,7 @@
                     <h3>Bienvenid@, {{actualUser.nombre + ' ' + actualUser.apellido_paterno + ' ' + actualUser.apellido_materno}}</h3>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary create-object" (click)="open(content)">Crear carro</button>
+                    <button *ngIf="this.actualUser.rol == 4 || this.actualUser.rol == 6" type="button" class="btn btn-primary create-object" (click)="open(content)">Crear carro</button>
                 </div>
 
                 <div *ngIf="isLoading" class="align-items-center">
@@ -105,7 +105,7 @@
                       </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancelar</button>
-                          <button *ngIf="this.actualUser.rol == 4 || this.actualUser.rol == 6" type="submit" class="btn btn-outline-dark" (click)="onSubmit()">Crear carro</button>
+                          <button type="submit" class="btn btn-outline-dark" (click)="onSubmit()">Crear carro</button>
                         </div>
                       </form>
                     </div>

@@ -21,7 +21,7 @@
                 </div>
 
                 <div>
-                    <button type="button" class="btn btn-primary create-object" (click)="open(content)">Crear compañía</button>
+                    <button *ngIf="this.actualUser.rol == 3" type="button" class="btn btn-primary create-object" (click)="open(content)">Crear compañía</button>
                 </div>
                 
                 <ng-template #content let-modal>
