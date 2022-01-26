@@ -26,7 +26,7 @@
             <li>
                 <a href="ads">Actos de servicio</a>
             </li>
-            <li>
+            <li *ngIf="this.actualUser.rol == 2 || this.actualUser.rol == 9 || this.actualUser.rol == 5">
                 <a href="informes">Informes técnicos</a>
             </li>
             <li>
