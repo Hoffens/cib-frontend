@@ -40,7 +40,10 @@ export class AdsService {
 
   crearAds(token: string, payload: any) {
     return this.http.post(this.endpointCrearActo, payload, { headers: {'Authorization' : token} })
+  }
 
+  actualizarAds(token: string, payload: any) {
+    return this.http.put(this.endpointCrearActo, payload, { headers: {'Authorization' : token} })
   }
 
 }

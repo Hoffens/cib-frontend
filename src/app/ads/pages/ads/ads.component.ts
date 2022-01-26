@@ -39,6 +39,8 @@ export class AdsComponent implements OnInit {
   public mostrarFail: boolean = false
   public mostrarExito: boolean = false
   public errorMsg: string = ''
+  public isEdit: boolean = false
+  public actualAds: any
 
   constructor(private adsService: AdsService, private route: Router, private modalService: NgbModal) { }
 
@@ -150,7 +152,29 @@ export class AdsComponent implements OnInit {
     })
   }
 
-  open(content: any) {
+  open(content: any, isEdit: boolean, ads: any) {
+    if (isEdit) {
+      this.isEdit = true
+      this.actualAds = ads
+      let today = new Date(ads.fecha_hora)
+      let estadoValue = 0
+
+      for (let i = 0; i < this.listEstados.length; i++) {
+        if (this.listEstados[i].nombre == ads.estado) {
+          estadoValue = this.listEstados[i].id
+          break
+        }
+      }
+
+      this.adsForm = new FormGroup({
+        clasificacion: new FormControl(ads.clasificacion, Validators.required),
+        direccion: new FormControl(ads.direccion, Validators.required),
+        estado: new FormControl(estadoValue, Validators.required),
+        obac: new FormControl(ads.OBAC_rut, Validators.required),
+        fecha_hora: new FormControl(today.toISOString().slice(0,16), Validators.required),
+        activo: new FormControl(true),
+      });
+    }
     this.modalReference = this.modalService.open(content, this.ngbModalOptions)
   }
 
@@ -165,10 +189,22 @@ export class AdsComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSubmit(isEdit: boolean) {
     let token = localStorage.getItem('token') 
     if (this.adsForm.valid) {
       this.errorFormulario = false
+
+      const payloadUpdate = {
+        id : this.actualAds.id,
+        clasificacion: this.adsForm.get('clasificacion')?.value,
+        direccion: this.adsForm.get('direccion')?.value,
+        estado: Number(this.adsForm.get('estado')?.value),
+        obac: Number(this.adsForm.get('obac')?.value),
+        fecha_hora: this.adsForm.get('fecha_hora')?.value,
+        activo: true,
+        rut_usuario: this.actualUser.rut
+      }
+
       const payload = {
         clasificacion: this.adsForm.get('clasificacion')?.value,
         direccion: this.adsForm.get('direccion')?.value,
@@ -179,24 +215,41 @@ export class AdsComponent implements OnInit {
         rut_usuario: this.actualUser.rut
       }
 
-      console.log(JSON.stringify(payload))
+      console.log(JSON.stringify(payloadUpdate))
 
-      this.adsService.crearAds(token == null ? '' : token, payload).subscribe({
-        next: (v: any) => {
-          this.limpiarFormulario()
-          this.mostrarFail = false
-          this.mostrarExito = true
-          this.modalReference.close()
-        },
-        error: (e: any) => {
-          console.log(e)
-          this.mostrarExito = false
-          this.mostrarFail = true
-          this.errorMsg = e.error.message
-          this.modalReference.close()
-        }
-      })
-
+      if (isEdit) {
+        this.adsService.actualizarAds(token == null ? '' : token, payloadUpdate).subscribe({
+          next: (v: any) => {
+            this.limpiarFormulario()
+            this.mostrarFail = false
+            this.mostrarExito = true
+            this.modalReference.close()
+          },
+          error: (e: any) => {
+            console.log(e)
+            this.mostrarExito = false
+            this.mostrarFail = true
+            this.errorMsg = e.error.message
+            this.modalReference.close()
+          }
+        })
+      } else {
+        this.adsService.crearAds(token == null ? '' : token, payload).subscribe({
+          next: (v: any) => {
+            this.limpiarFormulario()
+            this.mostrarFail = false
+            this.mostrarExito = true
+            this.modalReference.close()
+          },
+          error: (e: any) => {
+            console.log(e)
+            this.mostrarExito = false
+            this.mostrarFail = true
+            this.errorMsg = e.error.message
+            this.modalReference.close()
+          }
+        })
+      }
     } else {
       this.errorFormulario = true
     }
