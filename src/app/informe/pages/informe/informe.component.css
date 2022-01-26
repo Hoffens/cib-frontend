@@ -43,3 +43,15 @@ h3 {
 .btn-custom {
     background-color: #e0e5e5;
 }
+
+.carousel-img {
+    height: auto;
+    width: 100%;
+}
+
+.carousel-control-prev-icon{
+    background-image: url('https://apufpel.com.br/assets/img/seta_prim.png') !important
+ }
+ .carousel-control-next-icon{
+   background-image: url('https://apufpel.com.br/assets/img/seta_ult.png') !important
+ }

@@ -26,51 +26,24 @@
                 </div>
                 -->
                 
-                <!-- 
                 <ng-template #content let-modal>
                     <div class="modal-header">
-                      <h4 class="modal-title" id="modal-basic-title">Creación compañía</h4>
+                      <h4 class="modal-title" id="modal-basic-title">Imágenes informe técnico</h4>
                       <button type="button" class="close" aria-label="Close" (click)="onCancel()">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form [formGroup]="companiaForm">
-                        <div class="form-group">
-                            <label for="nombreInput">Nombre</label>
-                            <input type="text" class="form-control" id="nombreInput" placeholder="Ingrese nombre" formControlName="nombre">
-                            <div *ngIf="this.companiaForm.get('nombre')?.touched && !this.companiaForm.get('nombre')?.valid" class="alert alert-danger" role="alert">
-                              Por favor ingrese un nombre válido.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="ubicacionInput">Ubicación</label>
-                            <input type="text" class="form-control" id="ubicacionInput" placeholder="Ingrese ubicación" formControlName="ubicacion">
-                            <div *ngIf="this.companiaForm.get('ubicacion')?.touched && !this.companiaForm.get('ubicacion')?.valid" class="alert alert-danger" role="alert">
-                              Por favor ingrese una ubicación válida.
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefonoInput">Teléfono</label>
-                            <input type="text" class="form-control" id="telefonoInput" placeholder="Ingrese teléfono" formControlName="telefono">
-                            <div *ngIf="this.companiaForm.get('telefono')?.touched && !this.companiaForm.get('telefono')?.valid" class="alert alert-danger" role="alert">
-                              Por favor ingrese un teléfono válido.
-                            </div>
-                        </div>
-                        <div *ngIf="errorFormulario" class="alert alert-danger alert-dismissible fade show" role="alert">
-                            El formulario contiene errores, revise los datos ingresados.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeModalErrorAlert()">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
+                      <ngb-carousel *ngIf="this.informeImagen">
+                        <ng-template ngbSlide *ngFor="let imagen of informeImagen">
+                          <div class="picsum-img-wrapper">
+                            <img class="carousel-img" [src]="imagen.ruta_imagen">
                           </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-outline-danger" (click)="onCancel()">Cancelar</button>
-                          <button type="submit" class="btn btn-outline-dark" (click)="onSubmit()">Crear compañía</button>
-                        </div>
-                      </form>
+                      </ng-template>
+                    </ngb-carousel>
                     </div>
                   </ng-template>
-                  -->
+                  
                 <div *ngIf="isLoading" class="align-items-center">
                     <div>
                         <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
@@ -106,6 +79,8 @@
                             <th scope="col">Bienes siniestrados</th>
                             <th scope="col">Investigador</th>
                             <th scope="col">Creador informe</th>
+                            <th scope="col">Imágenes</th>
+
                           </tr>
                         </thead>
                         <tbody *ngIf="listInformes">
@@ -121,6 +96,12 @@
                             <td>{{informe.bienes_siniestrados}}</td>
                             <td>{{informe.investigador}}</td>
                             <td>{{informe.inf_usuario}}</td>
+                            <td>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16" (click)="open(content, informe)">
+                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                              </svg>
+                            </td>
                           </tr>
                         </tbody>
                     </table>
