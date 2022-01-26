@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AsistenciaComponent } from './pages/asistencia/asistencia.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import { AsistenciaComponent } from './pages/asistencia/asistencia.component';
     AsistenciaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    SharedModule
   ]
 })
 export class AsistenciaModule { }

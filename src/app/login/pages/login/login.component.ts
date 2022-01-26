@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('usuario', JSON.stringify(this.respuesta.data))   // inicio exitoso, guardamos el token
         this.error = false
         this.isLoading = false
-        this.route.navigate(['/users'])
+        this.route.navigate(['/dashboard'])
       },
       error: (e) => {
         this.errorMsg = e.error.message
