@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { InformeService } from '../../services/informe.service';
 
 @Component({
   selector: 'app-informe',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InformeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private informeService: InformeService, private route: Router) { }
 
   ngOnInit(): void {
   }
