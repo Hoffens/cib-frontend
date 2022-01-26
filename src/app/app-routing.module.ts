@@ -5,6 +5,7 @@ import { DashboardComponent } from "./dashboard/pages/dashboard/dashboard.compon
 import { UsuariosComponent } from './usuarios/pages/usuarios/usuarios.component';
 import { CompaniasComponent } from "./companias/pages/companias/companias.component";
 import { CarrosComponent } from './carros/pages/carros/carros.component';
+import { HerramientasComponent } from './herramientas/pages/herramientas/herramientas.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,11 @@ const routes: Routes = [
     {
         path: 'carros',
         component: CarrosComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'herramientas',
+        component: HerramientasComponent,
         pathMatch: 'full'
     },
     {
