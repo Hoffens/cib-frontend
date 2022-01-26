@@ -15,6 +15,7 @@ import { CompaniasModule } from './companias/companias.module';
 import { CarrosModule } from './carros/carros.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HerramientasModule } from './herramientas/herramientas.module';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CompaniasModule,
     CarrosModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HerramientasModule
   ],
   bootstrap: [AppComponent]
 })

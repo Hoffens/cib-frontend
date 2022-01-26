@@ -12,6 +12,7 @@ export class HerramientasComponent implements OnInit {
   public actualUser: any
   public listHerramientas: any = []
   public isLoading: boolean = false
+  public showMenu: boolean = true
 
   constructor(private herramientasService: HerramientasService, private route: Router) { }
 
@@ -35,6 +36,25 @@ export class HerramientasComponent implements OnInit {
     {
       this.route.navigate(['/404'])
     }
+  }
+
+  esconderMenu() {
+    //this.showMenu ? this.showMenu = false : this.showMenu = true
+    let sidebar = document.getElementById('sidebar')
+    this.showMenu ? this.showMenu = false : this.showMenu = true
+    /*
+    if (this.showMenu) {
+      if (sidebar != null)
+          sidebar.setAttribute('style', 'margin-left: -250px;')
+      this.showMenu = false
+    }
+    else
+    {
+      if (sidebar != null)
+          sidebar.setAttribute('style', 'margin-left: 0;')
+      this.showMenu = true
+    }
+    */
   }
 
   obtenerHerramientas() {
